@@ -76,7 +76,7 @@ In Hive partitioning is useful for dividing our data into pertinent chunks for o
 
 Dynamic partitioning is when partitioning is done at runtime, i.e. while table data is being loaded into Hive.
 
-Dynamic partitioning is useful for:
+Dynamic partitioning is useful for:\
 When a programmer cannot be sure (or doesn't want the tedious task of) enumerating every possible value for a column. For example, if I'm inserting COVID data into my Hive database and I want it partitioned on country, I may not want to list out all the possible countries in the dataset, e.g.  
 ~~~
 hive>LOAD DATA INPATH '/hdfs_path_to_file' INTO TABLE t1 PARTITION(country="US")
