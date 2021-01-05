@@ -55,7 +55,7 @@ db.collection.find(
   {},
   {field1: 1, field3: 1, _id: 0}
 )
-// NOTE: if you want the _id field not to be shown, it must explicitly be declared, as above.
+// NOTE: if you want the _id field not to be shown, it must explicitly be excluded, as above.
 
 // Return all documents with all fields except those specified
 db.collection.find(
