@@ -128,7 +128,9 @@ An HDFS block is an actual, physical division of data, i.e. a 128 MB span of sto
 MapReduce is a data processing framework that processes large datasets by first mapping some function onto the initial data in the "Mapper" stage and then reducing the results of that function into a more concise and coherent output in the "reducer" stage.
 
 To run a map reduce job on a Hadoop cluster first a programmer must write a java JAR file containing the Map and Reduce stage logic. Then it is passed to the cluster with the following syntax: 
->>job_logic_jar_file.jar /path_to_input_data /path_to_output_directory .
+~~~
+job_logic_jar_file.jar /path_to_input_data /path_to_output_directory .
+~~~
 
 ## What are the main configuration parameters in a "MapReduce" program?
 
