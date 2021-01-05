@@ -77,7 +77,7 @@ In Hive partitioning is useful for dividing our data into pertinent chunks for o
 Dynamic partitioning is when partitioning is done at runtime, i.e. while table data is being loaded into Hive.
 
 Dynamic partitioning is useful for:
-- When a programmer cannot be sure (or doesn't want the tedious task of) enumerating every possible value for a column. For example, if I'm inserting COVID data into my Hive database and I want it partitioned on country, I may not want to list out all the possible countries in the dataset, e.g.
+- When a programmer cannot be sure (or doesn't want the tedious task of) enumerating every possible value for a column. For example, if I'm inserting COVID data into my Hive database and I want it partitioned on country, I may not want to list out all the possible countries in the dataset, e.g.  
 ~~~
 hive>LOAD DATA INPATH '/hdfs_path_to_file' INTO TABLE t1 PARTITION(country="US")
 hive>LOAD DATA INPATH '/hdfs_path_to_file' INTO TABLE t1 PARTITION(country="UK")
@@ -85,29 +85,29 @@ hive>LOAD DATA INPATH '/hdfs_path_to_file' INTO TABLE t1 PARTITION(country="Germ
 ...
 ~~~
 
-- The other is when loading data from an unpartitioned Hive table into a new partitioned one, to decrease query latency. For example, say I have a transaction_details table that contains customer ID, transaction amount, month of transaction, and country in this schema: 
+- The other is when loading data from an unpartitioned Hive table into a new partitioned one, to decrease query latency. For example, say I have a transaction_details table that contains customer ID, transaction amount, month of transaction, and country in this schema:  
 ~~~
 hive>CREATE TABLE transaction_details (cust_id INT, amount FLOAT, month STRING, country STRING)
 hive>ROW FORMAT DELIMITED
 hive>FIELDS TERMINATED BY ',';
-~~~
+~~~  
 With 50,000 rows inserted, my query for how much revenue is generated each month is taking way too long. To alleviate this I can move the current table to a newly partitioned table.
-Create a new partitioned table:
+Create a new partitioned table:  
 ~~~
 hive>CREATE TABLE partitioned_transactions (cust_id INT, amount FLOAT, country STRING)
 hive>PARTITIONED BY (month STRING)
 hive>ROW FORMAT DELIMITED
 hive>FIELDS TERMINATED BY ',';
-~~~
-Set the appropriate Hive settings to enable dynamic repartitioning:
-~~~
+~~~  
+Set the appropriate Hive settings to enable dynamic repartitioning:  
+~~~  
 hive>SET hive.exec.dynamic.partition = true;
 hive>SET hive.exec.dynamic.partition.mode = nonstrict;
-~~~
-And transfer data into the partioned table:
+~~~  
+And transfer data into the partioned table:  
 ~~~
 hive>INSERT OVERWRITE TABLE partitioned_transactions PARTITION (month) SELECT cust_id, amount, country, month FROM transaction_details;
-~~~
+~~~  
 **Note:** To insert into the partitioned table, you have to ensure that the partitioned column (in this case month) *must* be the last column listed in the SELECT statement.
 
 ## How can a partition be added to an already partitioned table?
