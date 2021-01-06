@@ -6,18 +6,20 @@ Create, Retrieve, Update, Delete
 
 ## What are some CRUD methods for Mongo?
 
-| Create | insertOne, insertMany  |
-|Retrieve| find                   |
-| Update | updateOne, updateMany  |
-| Delete | deleteOne, deleteMany  |
+|   Acronym   | Examples               |
+|:-----------:|:-----------------------|
+| **C**reate  | insertOne, insertMany  |
+| **R**etrieve| find                   |
+| **U**pdate  | updateOne, updateMany  |
+| **D**elete  | deleteOne, deleteMany  |
 
 ## What does the acronym ACID mean in relation to databases?
 
-The acronym ACID describes the aspects that a database should have it's practicing strict consistency. The letters stand for:
+The acronym ACID describes the aspects that a database should have if it's practicing strict consistency. The letters stand for:
 - **Atomicity**: Database transactions should be atomic, that is indivisible, and so they should fail if any part of the transaction fails. For example, if trying to update a database record, one of the update values attempts to put a string in an integer field, the entire update should fail, not just the filling of that one field.
 - **Consistency**: Databases need to guarantee that the data held therein matches the rules, that is the schema, of the database so that any operations done using the data in the database won't be broken by a datatype mismatch when they go to retrieve that data. If an update is attempted with a datatype mismatch, the database should "roll back" to the previous state to ensure consistency with its rules.
-- **Isolation**: Databases need to ensure that transactions happen in isolation from one another, that is that it will handle transaction requests in an orderly manner so that no two requests are competing with each other for write access to the database. An example of this would be if on e-commerce site if you are trying to buy 6 of an item and your neighbor is on the same site trying to buy 5 of the same item but there is only 10 items in stock, the site is observing isolation if it ensures that one order goes through before the other and correctly limits the purchasing ability of the 
-- **Durability**:
+- **Isolation**: Databases need to ensure that transactions happen in isolation from one another, that is that it will handle transaction requests in an orderly manner so that no two requests are competing with each other for write access to the database. An example of this would be if on e-commerce site if you are trying to buy 6 of an item and your neighbor is on the same site trying to buy 5 of the same item but there is only 10 items in stock, the site database is observing isolation if it ensures that one order goes through before the other and correctly limits the purchasing ability of the other user instead of accepting both, thereby promising more units than it has.
+- **Durability**: 
 
 ## What does the acronym BASE mean in relation to databases?
 
