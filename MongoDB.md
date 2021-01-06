@@ -7,7 +7,7 @@ Create, Retrieve, Update, Delete
 ## What are some CRUD methods for Mongo?
 
 |   Acronym   | Examples               |
-|:-----------:|:-----------------------|
+|:------------|:-----------------------|
 | **C**reate  | insertOne, insertMany  |
 | **R**etrieve| find                   |
 | **U**pdate  | updateOne, updateMany  |
