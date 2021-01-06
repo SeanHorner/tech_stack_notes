@@ -1,5 +1,30 @@
 # MongoDB Notes
 
+## What does the acronym CRUD mean in relation to databases?
+
+Create, Retrieve, Update, Delete
+
+## What are some CRUD methods for Mongo?
+
+| Create | insertOne, insertMany  |
+|Retrieve| find                   |
+| Update | updateOne, updateMany  |
+| Delete | deleteOne, deleteMany  |
+
+## What does the acronym ACID mean in relation to databases?
+
+The acronym ACID describes the aspects that a database should have it's practicing strict consistency. The letters stand for:
+- **Atomicity**: Database transactions should be atomic, that is indivisible, and so they should fail if any part of the transaction fails. For example, if trying to update a database record, one of the update values attempts to put a string in an integer field, the entire update should fail, not just the filling of that one field.
+- **Consistency**: Databases need to guarantee that the data held therein matches the rules, that is the schema, of the database so that any operations done using the data in the database won't be broken by a datatype mismatch when they go to retrieve that data. If an update is attempted with a datatype mismatch, the database should "roll back" to the previous state to ensure consistency with its rules.
+- **Isolation**: Databases need to ensure that transactions happen in isolation from one another, that is that it will handle transaction requests in an orderly manner so that no two requests are competing with each other for write access to the database. An example of this would be if on e-commerce site if you are trying to buy 6 of an item and your neighbor is on the same site trying to buy 5 of the same item but there is only 10 items in stock, the site is observing isolation if it ensures that one order goes through before the other and correctly limits the purchasing ability of the 
+- **Durability**:
+
+## What does the acronym BASE mean in relation to databases?
+
+- **Basically Available**:
+- **Soft State**:
+- **Eventual Consistency**:
+
 ## What are the best features of MongoDB?
 
 - **Indexing**:     It leverages indexes on document fields to improve search performance.
@@ -7,6 +32,10 @@
 - **Ad-hoc Queries**: It supports ad-hoc queries by indexing BSON documents and using a unique query language. 
 - **Schemaless**:   MongoDB provides excellent felxibility by not requiring documents to adhere to a schema.
 - **Sharding**:     MongoDB uses sharding to allow horizontal scaling of workloads, allowing higher data throughput by leveraging cluster nodes.
+
+## What is an index in MongoDB?
+
+An index is a listing of the documents in a collection ordered by a specified field. A collection can have multiple indices on different fields. An index is useful for increasing the speed of running a query, but the trade off is that it increases the time inserting documents into the collection takes, since Mongo has to figure out where the document fits into the index.
 
 ## What is the default port for MongoDB?
 
@@ -22,9 +51,9 @@ A document is the equivalent of a row in other database software.
 
 ## What rules does Mongo enforce about the structure of documents in a collection?
 
-The only rule that MongoDB enforces is that each document needs to have a unique object id number.
+The only rule that MongoDB enforces on documents in a collection is that each document needs to have a unique object id number.
 
-## What is an object id?
+## What is an Object ID?
 
 An ObjectId is a unique identifier assigned to each document in MongoDB as a reference. The field for this identifier is $oid.
 
@@ -96,12 +125,12 @@ db.collection.find().sort( { field: 1 } )
 // The limit() method returns only as many documents as specified
 db.collection.find().limit( 5 )
 
-// The skip() method skips the first n documents, as specified by the skip method
+// The skip() method skips the first n documents, as specified in the method call
 db.collection.find().skip( 5 )
 
 // These methods can be chained to get all effects consolidated into one
-// The below returns 10 documents, skipping the first 5, sorting by the specified field
-db.collection.find().sort({field: 1}).limit(10).skip(5)
+// The below returns 10 documents, skipping the first 3, sorting by the specified field
+db.collection.find().sort( { field: 1 } ).limit( 10 ).skip( 3 )
 ~~~
 
 ## What are JSON?
@@ -115,6 +144,20 @@ JSON allows 6 data types: String, Number, Object, Array, Boolean, and Null.
 ## What are BSONs?
 
 Binary JSON objects which have a few more datatypes than normal JSON objects, such as datetime, byte array, Double, Decimal, 32-bit Int, and 64-bit Int.
+
+## What is multiplicity?
+
+Multiplicity describes how many of one object in a database can be connected to another. It comes in three variaties:
+- 1-to-1
+  - A 1-to-1 relationship occurs when each object can only have one corresponding object to which it is attached. For example, the relationship between a principal and their school. Each school only has one principal and each principal is responsible for only one school.
+- 1-to-N
+  - A 1-to-N relationship occurs when one object can be related to many others in a corresponding set, but those in the corresponding set can only have a relationship to one object in the first set. For example, the relationship between a mother and her children is 1-to-N, because one mother may have many children, but each child only has one mother. Another example is the relationship between a school and its students: a school can have many students enrolled, but each student attends only one school.
+- N-to-N
+  - An N-to-N relationship occurs when objects in both sets can have relationships to multiple objects in the other set. For example, the relationship between teachers and students. Each teacher is responsible for teaching many students in a class, and each student has many teachers, one for each subject.
+
+## What is cardinality?
+
+Cardinality is the size of the N in 1-to-N and N-to-N relationships. For example, the cardinality of the relationship between teachers and students (in the N-to-N example above) is on the order of dozens (we can say between 1-3 dozen students per class) and that the cardinality of the relationship between students and teachers is on the order of 10 (generally each student takes 6-10 classes per semester). It should be noted that cardinality is directional, in the example given which direction of the N-to-N relationship you're looking at changes the cardinality of the relationship.
 
 ## If using replication, can some members use journaling and others not?
 
